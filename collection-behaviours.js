@@ -29,21 +29,6 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
     };
   });
 };
-/*
-var constructor = Mongo.Collection;
-Mongo.Collection = function () {
-  var ret = constructor.apply(this, arguments);
-  CollectionBehaviours.extendCollectionInstance(this);
-  return ret;
-};
-
-Mongo.Collection.prototype = Object.create(constructor.prototype);
-
-for (var func in constructor) {
-  if (constructor.hasOwnProperty(func)) {
-    Mongo.Collection[func] = constructor[func];
-  }
-}*/
 
 CollectionBehaviours.wrapCollection = function (ns, as) {
   if (!as._CollectionConstructor2) as._CollectionConstructor2 = as.Collection;
