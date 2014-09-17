@@ -26,7 +26,7 @@ Package.on_use(function (api, where) {
       "behaviours/sortable.js",
       "behaviours/trackable.js"
   ], both);
-
+  api.addFiles("users-compat.js");
   api.export("CollectionBehaviours");
 });
 Package.on_test(function(api) {
