@@ -1,6 +1,8 @@
 # Meteor Collection Behaviours
 
-Extends Meteor.Collection with custom behaviour patterns.
+Extends Meteor.Collection (or Mongo.collection) with custom behaviour patterns.
+
+Correcting a lot of issues/bugs from Sewdn and add tiny tests.
 
 Uses the excellent collection-hooks package to hook into collection hooks.
 

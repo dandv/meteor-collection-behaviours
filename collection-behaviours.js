@@ -1,4 +1,4 @@
-var constructor = Meteor.Collection;
+/* global CollectionBehaviours Meteor Mongo _ */
 var behaviours = {};
 
 CollectionBehaviours = {};
@@ -29,17 +29,47 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
     };
   });
 };
-
-Meteor.Collection = function () {
+/*
+var constructor = Mongo.Collection;
+Mongo.Collection = function () {
   var ret = constructor.apply(this, arguments);
   CollectionBehaviours.extendCollectionInstance(this);
   return ret;
 };
 
-Meteor.Collection.prototype = Object.create(constructor.prototype);
+Mongo.Collection.prototype = Object.create(constructor.prototype);
 
 for (var func in constructor) {
   if (constructor.hasOwnProperty(func)) {
-    Meteor.Collection[func] = constructor[func];
+    Mongo.Collection[func] = constructor[func];
   }
+}*/
+
+CollectionBehaviours.wrapCollection = function (ns, as) {
+  if (!as._CollectionConstructor2) as._CollectionConstructor2 = as.Collection;
+  if (!as._CollectionPrototype2) as._CollectionPrototype2 = new as.Collection(null);
+
+  var constructor = as._CollectionConstructor2;
+  var proto = as._CollectionPrototype2;
+
+  ns.Collection = function () {
+    var ret = constructor.apply(this, arguments);
+    CollectionBehaviours.extendCollectionInstance(this);
+    return ret;
+  };
+
+  ns.Collection.prototype = proto;
+
+  for (var prop in constructor) {
+    if (constructor.hasOwnProperty(prop)) {
+      ns.Collection[prop] = constructor[prop];
+    }
+  }
+};
+
+if (typeof Mongo !== "undefined") {
+  CollectionBehaviours.wrapCollection(Meteor, Mongo);
+  CollectionBehaviours.wrapCollection(Mongo, Mongo);
+} else {
+  CollectionBehaviours.wrapCollection(Meteor, Meteor);
 }

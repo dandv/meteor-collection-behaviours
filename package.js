@@ -1,6 +1,6 @@
 Package.describe({
-  summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks",
-  "version": "0.1.5",
+  summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks compatible with >0.9.0",
+  "version": "0.2.0",
   "git": "https://github.com/jbrousseau/meteor-collection-behaviours.git",
   "name": "jbrousseau:meteor-collection-behaviours"
 });
@@ -13,7 +13,8 @@ Package.on_use(function (api, where) {
   }
   api.use([
     "underscore",
-    "matb33:collection-hooks@0.7.3"
+    "mongo-livedata",
+    "matb33:collection-hooks@0.7.6"
   ], both);
 
   api.add_files([
@@ -28,16 +29,8 @@ Package.on_use(function (api, where) {
 
   api.export("CollectionBehaviours");
 });
-
-Package.on_test(function (api) {
-  /*
-  api.use([
-    "collection-behaviours",
-    "underscore",
-    "accounts-base",
-    "accounts-password",
-    "tinytest",
-    "test-helpers"
-  ], both);
-*/
+Package.on_test(function(api) {
+  api.use('tinytest');
+  api.use('jbrousseau:meteor-collection-behaviours');
+  api.addFiles('collection-behaviours_tests.js');
 });
