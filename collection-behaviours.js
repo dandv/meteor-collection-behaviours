@@ -30,6 +30,20 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
   });
 };
 
+CollectionBehaviours.reassignPrototype = function (instance, constr) {
+  var hasSetPrototypeOf = typeof Object.setPrototypeOf === "function";
+
+  if (!constr) constr = typeof Mongo !== "undefined" ? Mongo.Collection : Meteor.Collection;
+
+  // __proto__ is not available in < IE11
+  // Note: Assigning a prototype dynamically has performance implications
+  if (hasSetPrototypeOf) {
+    Object.setPrototypeOf(instance, constr.prototype);
+  } else if (instance.__proto__) {
+    instance.__proto__ = constr.prototype;
+  }
+};
+
 CollectionBehaviours.wrapCollection = function (ns, as) {
   if (!as._CollectionConstructor2) as._CollectionConstructor2 = as.Collection;
   if (!as._CollectionPrototype2) as._CollectionPrototype2 = new as.Collection(null);
