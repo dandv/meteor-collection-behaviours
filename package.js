@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks compatible with >0.9.0",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "git": "https://github.com/jbrousseau/meteor-collection-behaviours.git",
   "name": "jbrousseau:meteor-collection-behaviours"
 });
@@ -24,6 +24,10 @@ Package.on_use(function (api, where) {
       "behaviours/loggable.js",
       "behaviours/autoIncrementable.js",
       "behaviours/sortable.js",
+      "behaviours/avatarable.js",
+      "behaviours/blamable.js",
+      "behaviours/ownerable.js",
+      "behaviours/selectable.js",
       "behaviours/trackable.js"
   ], both);
   api.addFiles("users-compat.js");
