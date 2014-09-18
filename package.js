@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks compatible with >0.9.0",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "git": "https://github.com/jbrousseau/meteor-collection-behaviours.git",
   "name": "jbrousseau:meteor-collection-behaviours"
 });
