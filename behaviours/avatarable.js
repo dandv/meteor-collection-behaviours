@@ -40,4 +40,20 @@ CollectionBehaviours.defineBehaviour('avatarable', function(getTransform, args) 
   self._transform = function(doc) {
     return new Avatarable(self.prevTransformA(doc));
   };
+  self.changeAvatar = function(docId, newFile, oldFileId) {
+    if (typeof oldFileId !== 'undefined') {
+     Images.remove(oldFileId);
+    }
+    Images.insert(newFile, function(err, fileObj) {
+      if (docId._id) {
+        self.update({
+          _id: docId._id
+        }, {
+          $set: {
+            'avatarfile_id': fileObj._id
+          }
+        });
+      }
+    });
+  }
 });

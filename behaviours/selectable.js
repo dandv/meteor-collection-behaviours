@@ -33,11 +33,11 @@ CollectionBehaviours.defineBehaviour('selectable', function(getTransform, args) 
     return self.findOne({
       _id: Session.get('pb' + self._name + 'Selected')
     });
-  }
+  };
   self.selectedId = function() {
     return Session.get('pb' + self._name + 'Selected');
-  }
+  };
   self.unSelect = function() {
       Session.set('pb' + self._name + 'Selected', null);
-  }
+  };
 });
