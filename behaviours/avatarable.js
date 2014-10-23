@@ -9,12 +9,8 @@ CollectionBehaviours.defineBehaviour('avatarable', function(getTransform, args) 
   _.extend(Avatarable.prototype, {
     //add functions to document collection
     avatarFileUrl: function() {
-      var url = "/img/character/empty.gif";
-      if (this.avatarfile_id) {
-        var file = this.avatarFile();
-        url = file.url();
-      }
-      return url;
+      var file = this.avatarFile();
+      return file.url();
     },
     avatarFile: function() {
       var fileA = {url : function() { return "/img/character/empty.gif";},
@@ -45,9 +41,9 @@ CollectionBehaviours.defineBehaviour('avatarable', function(getTransform, args) 
      Images.remove(oldFileId);
     }
     Images.insert(newFile, function(err, fileObj) {
-      if (docId._id) {
+      if (docId) {
         self.update({
-          _id: docId._id
+          _id: docId
         }, {
           $set: {
             'avatarfile_id': fileObj._id
